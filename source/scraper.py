@@ -12,7 +12,7 @@ Notas de diseño
   interpreta y se respeta antes de la primera petición.
 * Las peticiones van en serie con un retardo configurable, para no castigar al
   servidor, y los fallos transitorios se reintentan con espera exponencial.
-* Aquí no se limpia ni se imputa nada: la limpieza es la Práctica 2. Los
+* Aquí no se limpia ni se imputa nada. Los
   valores ausentes se exportan como celda vacía a propósito.
 
 Uso
@@ -186,7 +186,7 @@ def save_csv(rows: list[dict], out_path: Path) -> None:
 
 
 def report_completeness(rows: list[dict]) -> None:
-    """Registra cuántos registros tienen cada campo relleno (evidencia del §5)."""
+    """Registra cuántos registros tienen cada campo relleno ."""
     if not rows:
         return
     log.info("Informe de completitud (%s registros):", len(rows))
