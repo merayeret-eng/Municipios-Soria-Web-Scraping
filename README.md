@@ -4,7 +4,7 @@ Dataset con los **183 municipios** de la provincia de Soria (comarca, partido ju
 superficie, altitud, densidad, gentilicio, código postal, alcaldía, coordenadas y sitio web),
 extraído de la Wikipedia en español con un scraper propio en Python.
 
-**Autor:** Aaron Mera — Máster Data Science UOC, M2.851 Tipología y ciclo de vida de los datos
+**Autor:** Aaron Mera — Máster Data Science UOC, Tipología y ciclo de vida de los datos
 **Sitio de origen:** https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria
 **DOI:** https://doi.org/10.5281/zenodo.24164218
 **Licencia:** datos CC BY-SA 4.0 · código MIT
