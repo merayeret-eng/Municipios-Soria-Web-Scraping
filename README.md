@@ -107,21 +107,7 @@ Por defecto recorre los 183 municipios y escribe `../dataset/municipios_soria.cs
 | `--limit` | `0` | Procesa solo N municipios (0 = todos) |
 | `--user-agent` | `Mozilla/5.0 (compatible; UOC-Practica1/1.0; ...)` | User-Agent de cada petición |
 
-### 5. Ejemplos
-
-```bash
-# Prueba rápida: 5 municipios, unos 10 segundos
-cd source
-python scraper.py --limit 5 --out ../dataset/prueba_5.csv
-
-# Ejecución completa (la que generó el dataset publicado)
-python scraper.py --delay 1.2
-
-# Más conservadora
-python scraper.py --delay 2.5 --retries 5
-```
-
-### 6. Salida
+### 5. Salida
 
 CSV con cabecera y una fila por municipio. El progreso y el informe de completitud por campo se
 escriben en la salida de error. Si `robots.txt` no permite la página índice, el programa termina
