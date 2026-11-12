@@ -10,7 +10,12 @@ authors:
     given-names: "Aaron Yeret"
     affiliation: "Universitat Oberta de Catalunya"
 repository-code: "https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping"
-url: "https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping"
+url: "https://doi.org/10.5281/zenodo.24164219"
+doi: "10.5281/zenodo.24164219"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24164219"
+    description: "Dataset publicado en Zenodo"
 abstract: >-
   Dataset con una fila por municipio de la provincia de Soria (183 registros,
   18 columnas), extraído de la Wikipedia en español mediante un scraper propio

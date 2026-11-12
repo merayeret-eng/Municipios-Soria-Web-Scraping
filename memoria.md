@@ -11,7 +11,7 @@
 | Integrante | Aaron Yeret Mera Arana |
 | Sitio web elegido | https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria |
 | Repositorio del código | https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping (privado, con acceso al profesor) |
-| Dataset publicado | `<PENDIENTE: https://doi.org/10.5281/zenodo.XXXXXXX>` |
+| Dataset publicado | https://doi.org/10.5281/zenodo.24164219 |
 | Vídeo de presentación | `<PENDIENTE: https://drive.google.com/...>` |
 
 ---
@@ -297,7 +297,7 @@ El dataset se publica en **Zenodo** en CSV, con licencia CC BY-SA 4.0, y se incl
 | Columnas | 18 |
 | Codificación | UTF-8 con BOM |
 | Separador | coma |
-| DOI | `<PENDIENTE: https://doi.org/10.5281/zenodo.XXXXXXX>` |
+| DOI | https://doi.org/10.5281/zenodo.24164219 |
 
 **Metadatos con los que se publica:** título (el del §2), autoría (Aaron Yeret Mera Arana), descripción (la del §3, incluyendo granularidad, alcance y fecha de extracción), tipo de recurso «Dataset», versión 1.0 y licencia CC BY-SA 4.0.
 

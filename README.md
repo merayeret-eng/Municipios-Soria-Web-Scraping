@@ -6,7 +6,7 @@ extraído de la Wikipedia en español con un scraper propio en Python.
 
 **Autor:** Aaron Mera — Máster Data Science UOC, M2.851 Tipología y ciclo de vida de los datos
 **Sitio de origen:** https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria
-**DOI:** `<pendiente: https://doi.org/10.5281/zenodo.XXXXXXX>`
+**DOI:** https://doi.org/10.5281/zenodo.24164219
 **Licencia:** datos CC BY-SA 4.0 · código MIT
 
 ---
