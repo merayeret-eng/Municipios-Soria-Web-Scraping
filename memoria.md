@@ -12,7 +12,7 @@
 | Sitio web elegido | https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria |
 | Repositorio del código | https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping |
 | Dataset publicado | https://doi.org/10.5281/zenodo.24164218 |
-| Vídeo de presentación | `` |
+| Vídeo de presentación | `https://drive.google.com/file/d/16PwY5XTYo5iCo6csYiKtg0dP3b3YBv44/view?usp=sharing` |
 
 ---
 
@@ -301,7 +301,7 @@ El dataset se publica en **Zenodo** en CSV, con licencia CC BY-SA 4.0, y se incl
 
 ## 11. Vídeo
 
-**Enlace:** 
+**Enlace: https://drive.google.com/file/d/16PwY5XTYo5iCo6csYiKtg0dP3b3YBv44/view?usp=sharing** 
 
 ---
 
