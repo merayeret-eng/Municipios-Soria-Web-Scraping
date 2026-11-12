@@ -11,7 +11,7 @@
 | Integrante | Aaron Yeret Mera Arana |
 | Sitio web elegido | https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria |
 | Repositorio del código | https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping (privado, con acceso al profesor) |
-| Dataset publicado | https://doi.org/10.5281/zenodo.24164219 |
+| Dataset publicado | https://doi.org/10.5281/zenodo.24164218 |
 | Vídeo de presentación | `<PENDIENTE: https://drive.google.com/...>` |
 
 ---
@@ -53,7 +53,7 @@ El título fija tema, alcance geográfico, contenido y año del dato.
 
 El dataset contiene **una fila por municipio** de la provincia de Soria: **183 registros y 18 columnas**. Cada fila reúne los datos administrativos, geográficos y demográficos que la ficha del municipio publica en la Wikipedia en español: comarca, partido judicial, población y su año de referencia, superficie, altitud, densidad, gentilicio, código postal, alcalde y partido político, coordenadas y sitio web, junto con la URL de origen y la fecha de extracción.
 
-Los datos se obtuvieron el **11 de noviembre de 2026** mediante un scraper propio en Python que navega desde el anexo provincial hasta el artículo de cada municipio. La población corresponde al año **2025**. El conjunto es un **corte transversal completo** de la provincia en una única fecha de referencia.
+Los datos se obtuvieron el **12 de noviembre de 2026** mediante un scraper propio en Python que navega desde el anexo provincial hasta el artículo de cada municipio. La población corresponde al año **2025**. El conjunto es un **corte transversal completo** de la provincia en una única fecha de referencia.
 
 El dataset se publica sin limpiar: conserva los valores de la fuente, con sus ausencias y sus inconsistencias. Esa limpieza es el objeto de la Práctica 2.
 
@@ -129,14 +129,14 @@ flowchart TB
 | `sitio_web` | texto | — | Dominio municipal indicado en la ficha | `abejar.es` |
 | `titulo_articulo` | texto | — | Título real de la página (revela redirecciones) | `Abejar` |
 | `url` | texto | — | URL exacta de la que se extrajo el registro | `https://es.wikipedia.org/wiki/Abejar` |
-| `fecha_extraccion` | fecha | ISO 8601 | Día en que se ejecutó el scraper | `2026-11-11` |
+| `fecha_extraccion` | fecha | ISO 8601 | Día en que se ejecutó el scraper | `2026-11-12` |
 
 Siete campos son numéricos (`poblacion`, `año_poblacion`, `superficie_km2`, `altitud_m`, `densidad_hab_km2`, `latitud`, `longitud`), diez son texto y uno es fecha. El dataset admite análisis estadístico y agrupaciones.
 
 ### 5.2 Cobertura temporal
 
 - **Periodo del dato:** población con referencia **2025** (183 de 183 registros). El resto de campos no lleva fecha propia en la fuente; se asume vigente a la fecha de extracción.
-- **Fecha de extracción:** **11 de noviembre de 2026**. Un único corte transversal: el dataset no permite analizar evolución temporal.
+- **Fecha de extracción:** **12 de noviembre de 2026**. Un único corte transversal: el dataset no permite analizar evolución temporal.
 
 ### 5.3 Completitud observada
 
@@ -297,9 +297,9 @@ El dataset se publica en **Zenodo** en CSV, con licencia CC BY-SA 4.0, y se incl
 | Columnas | 18 |
 | Codificación | UTF-8 con BOM |
 | Separador | coma |
-| DOI | https://doi.org/10.5281/zenodo.24164219 |
+| DOI | https://doi.org/10.5281/zenodo.24164218 |
 
-**Metadatos con los que se publica:** título (el del §2), autoría (Aaron Yeret Mera Arana), descripción (la del §3, incluyendo granularidad, alcance y fecha de extracción), tipo de recurso «Dataset», versión 1.0 y licencia CC BY-SA 4.0.
+**Metadatos con los que se publica:** título (el del §2), autoría (Aaron Yeret Mera Arana), descripción (la del §3, incluyendo granularidad, alcance y fecha de extracción), tipo de recurso «Dataset», versión 1.1 y licencia CC BY-SA 4.0.
 
 ---
 

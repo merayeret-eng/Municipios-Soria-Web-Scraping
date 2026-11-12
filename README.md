@@ -6,7 +6,7 @@ extraído de la Wikipedia en español con un scraper propio en Python.
 
 **Autor:** Aaron Mera — Máster Data Science UOC, M2.851 Tipología y ciclo de vida de los datos
 **Sitio de origen:** https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria
-**DOI:** https://doi.org/10.5281/zenodo.24164219
+**DOI:** https://doi.org/10.5281/zenodo.24164218
 **Licencia:** datos CC BY-SA 4.0 · código MIT
 
 ---
@@ -17,7 +17,7 @@ extraído de la Wikipedia en español con un scraper propio en Python.
 |---|---|---|---|
 | `dataset/municipios_soria.csv` | 183 | 18 | Wikipedia en español (anexo de municipios de Soria) |
 
-Una fila por municipio. Población con referencia **2025**; extracción del **11/11/2026**.
+Una fila por municipio. Población con referencia **2025**; extracción del **12/11/2026**.
 UTF-8 con BOM, separador coma. Sin limpiar: conserva las ausencias e inconsistencias de la fuente.
 
 ### Variables

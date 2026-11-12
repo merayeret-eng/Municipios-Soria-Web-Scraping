@@ -1,7 +1,7 @@
 {
   "title": "Municipios de la provincia de Soria: población, superficie y altitud (Wikipedia, 2025)",
   "upload_type": "dataset",
-  "description": "Dataset con una fila por municipio de la provincia de Soria (183 registros, 18 columnas), extraído de la Wikipedia en español mediante un scraper propio en Python. Incluye comarca, partido judicial, población y año de referencia, superficie, altitud, densidad, gentilicio, código postal, alcaldía, partido político, coordenadas, sitio web, URL de origen y fecha de extracción. Corte transversal completo; población con referencia 2025; extracción del 11 de noviembre de 2026. Se publica sin limpiar: conserva las ausencias e inconsistencias de la fuente.",
+  "description": "Dataset con una fila por municipio de la provincia de Soria (183 registros, 18 columnas), extraído de la Wikipedia en español mediante un scraper propio en Python. Incluye comarca, partido judicial, población y año de referencia, superficie, altitud, densidad, gentilicio, código postal, alcaldía, partido político, coordenadas, sitio web, URL de origen y fecha de extracción. Corte transversal completo; población con referencia 2025; extracción del 12 de noviembre de 2026. Se publica sin limpiar: conserva las ausencias e inconsistencias de la fuente.",
   "creators": [
     {
       "name": "Mera Arana, Aaron Yeret",
@@ -9,9 +9,9 @@
     }
   ],
   "license": "cc-by-sa-4.0",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "language": "spa",
-  "publication_date": "2026-11-11",
+  "publication_date": "2026-11-12",
   "keywords": [
     "web scraping",
     "Soria",
