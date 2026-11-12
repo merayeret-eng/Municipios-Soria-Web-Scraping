@@ -18,8 +18,7 @@ extraído de la Wikipedia en español con un scraper propio en Python.
 | `dataset/municipios_soria.csv` | 183 | 18 | Wikipedia en español (anexo de municipios de Soria) |
 
 Una fila por municipio. Población con referencia **2025**; extracción del **11/11/2026**.
-UTF-8 con BOM, separador coma. Sin limpiar: conserva ausencias e inconsistencias de la fuente
-sin limpieza.
+UTF-8 con BOM, separador coma. Sin limpiar: conserva las ausencias e inconsistencias de la fuente.
 
 ### Variables
 
