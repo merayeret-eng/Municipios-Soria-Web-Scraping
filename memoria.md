@@ -10,9 +10,9 @@
 |---|---|
 | Integrante | Aaron Yeret Mera Arana |
 | Sitio web elegido | https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria |
-| Repositorio del código | https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping (privado, con acceso al profesor) |
+| Repositorio del código | https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping |
 | Dataset publicado | https://doi.org/10.5281/zenodo.24164218 |
-| Vídeo de presentación | `<PENDIENTE: https://drive.google.com/...>` |
+| Vídeo de presentación | `` |
 
 ---
 
