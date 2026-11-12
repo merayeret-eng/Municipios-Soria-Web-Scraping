@@ -1,6 +1,6 @@
 # Práctica 1 — ¿Cómo podemos capturar los datos de la web?
 
-**M2.851 Tipología y ciclo de vida de los datos** · Máster Universitario en Ciencia de Datos (UOC)
+**Tipología y ciclo de vida de los datos** · Máster Universitario en Ciencia de Datos (UOC)
 
 ---
 
@@ -148,11 +148,7 @@ La extracción terminó sin errores (183 de 183 municipios). Cobertura de cada c
 | `superficie_km2`, `densidad_hab_km2`, `partido_politico` | 180/183 (98,4 %) | `sitio_web` | 158/183 (86,3 %) |
 | `gentilicio` | 99/183 (54,1 %) | | |
 
-Las ausencias no se imputan: se exportan como celda vacía. Es material de la Práctica 2.
-
-Con las seis dimensiones de DAMA UK: la **unicidad** se cumple (183 URL distintas, ningún municipio duplicado); la **completitud** es la de la tabla; la **puntualidad** queda limitada por un único corte. **Validez**, **exactitud** y **consistencia** no se evalúan: exigen normalizar y contrastar con la fuente primaria, que es el trabajo de la Práctica 2. El dataset se entrega con su calidad **documentada pero sin corregir**.
-
----
+Las ausencias no se imputan: se exportan como celda vacía. 
 
 ## 6. Propietario
 
@@ -299,7 +295,7 @@ El dataset se publica en **Zenodo** en CSV, con licencia CC BY-SA 4.0, y se incl
 | Separador | coma |
 | DOI | https://doi.org/10.5281/zenodo.24164218 |
 
-**Metadatos con los que se publica:** título (el del §2), autoría (Aaron Yeret Mera Arana), descripción (la del §3, incluyendo granularidad, alcance y fecha de extracción), tipo de recurso «Dataset», versión 1.1 y licencia CC BY-SA 4.0.
+**Metadatos con los que se publica:** t autoría (Aaron Yeret Mera Arana), descripción ( incluyendo granularidad, alcance y fecha de extracción), tipo de recurso «Dataset», versión 1.1 y licencia CC BY-SA 4.0.
 
 ---
 
@@ -307,7 +303,7 @@ El dataset se publica en **Zenodo** en CSV, con licencia CC BY-SA 4.0, y se incl
 
 **Enlace:** `<PENDIENTE: https://drive.google.com/...>` (Google Drive de la UOC)
 
-Duración: 8 minutos. Guion: problema y elección del sitio (1 min) · evaluación del sitio y dificultad (1,5 min) · dataset y cifras (2 min) · código: descubrimiento de enlaces, parseo de la ficha, ritmo y reintentos (2,5 min) · dificultades, licencia y ética (1 min).
+Duración: 8 minutos. 
 
 ---
 
