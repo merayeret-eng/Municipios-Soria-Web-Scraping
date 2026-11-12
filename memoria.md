@@ -301,9 +301,7 @@ El dataset se publica en **Zenodo** en CSV, con licencia CC BY-SA 4.0, y se incl
 
 ## 11. Vídeo
 
-**Enlace:** `<PENDIENTE: https://drive.google.com/...>` (Google Drive de la UOC)
-
-Duración: 8 minutos. 
+**Enlace:** 
 
 ---
 
