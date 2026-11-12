@@ -1,0 +1,35 @@
+MIT License (code)
+
+Copyright (c) 2026 Aaron Yeret Mera Arana
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+Dataset license
+
+The dataset in dataset/municipios_soria.csv is a derivative work of the
+Spanish Wikipedia (Wikimedia Foundation), which is published under
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+
+The dataset is therefore distributed under CC BY-SA 4.0 as well:
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Source: https://es.wikipedia.org/wiki/Anexo:Municipios_de_la_provincia_de_Soria
+Each row in the dataset keeps its source URL in the `url` column.

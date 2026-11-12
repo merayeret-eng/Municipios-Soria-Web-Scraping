@@ -1,0 +1,10 @@
+# Práctica 1 - M2.851 Tipología y ciclo de vida de los datos
+# Generado con: python -m pip freeze (Python 3.13.17)
+# Instalación: pip install -r requirements.txt
+
+beautifulsoup4==4.15.0
+requests==2.34.2
+
+# Dependencias transitivas relevantes (se instalan automáticamente):
+#   soupsieve==4.1
+#   urllib3==2.8.0
