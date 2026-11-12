@@ -19,7 +19,7 @@ extraído de la Wikipedia en español con un scraper propio en Python.
 
 Una fila por municipio. Población con referencia **2025**; extracción del **11/11/2026**.
 UTF-8 con BOM, separador coma. Sin limpiar: conserva ausencias e inconsistencias de la fuente
-(la limpieza es la Práctica 2).
+sin limpieza.
 
 ### Variables
 
