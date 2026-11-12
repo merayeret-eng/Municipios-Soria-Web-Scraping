@@ -1,4 +1,4 @@
-# Práctica 1 - M2.851 Tipología y ciclo de vida de los datos
+# Práctica 1 -Tipología y ciclo de vida de los datos
 # Generado con: python -m pip freeze (Python 3.13.17)
 # Instalación: pip install -r requirements.txt
 
