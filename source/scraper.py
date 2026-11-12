@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-"""Scraper for the municipalities of the province of Soria (es.wikipedia.org).
+"""Scraper de los municipios de la provincia de Soria (es.wikipedia.org).
 
-The script performs a two-level crawl:
+El script hace un recorrido en dos niveles:
 
-    level 1 -> the annex page, used only as an index of links
-    level 2 -> each municipality article, where the data actually lives
+    nivel 1 -> la página del anexo, usada solo como índice de enlaces
+    nivel 2 -> el artículo de cada municipio, donde están los datos
 
-Design notes
-------------
-* Only public article pages are requested (`/wiki/...`); robots.txt is parsed
-  and honoured before the first request.
-* Requests are serialised with a configurable delay so the server is never
-  hammered, and transient failures are retried with exponential backoff.
-* Nothing is cleaned or imputed here: Práctica 2 is about cleaning. Missing
-  values are exported as empty cells on purpose.
+Notas de diseño
+---------------
+* Solo se piden páginas públicas de artículo (`/wiki/...`); `robots.txt` se
+  interpreta y se respeta antes de la primera petición.
+* Las peticiones van en serie con un retardo configurable, para no castigar al
+  servidor, y los fallos transitorios se reintentan con espera exponencial.
+* Aquí no se limpia ni se imputa nada: la limpieza es la Práctica 2. Los
+  valores ausentes se exportan como celda vacía a propósito.
 
-Usage
------
-    python scraper.py --limit 5            # smoke test on 5 municipalities
-    python scraper.py --delay 1.5          # full run, slower and politer
+Uso
+---
+    python scraper.py --limit 5            # prueba rápida con 5 municipios
+    python scraper.py --delay 1.5          # recorrido completo, más lento
 """
 
 from __future__ import annotations
@@ -46,7 +46,7 @@ DEFAULT_USER_AGENT = (
     "+https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping) Python-requests"
 )
 
-# Column order of the resulting CSV.
+# Orden de las columnas del CSV resultante.
 FIELDS = [
     "municipio",
     "comarca",
@@ -72,7 +72,7 @@ log = logging.getLogger("scraper")
 
 
 class PoliteSession:
-    """A requests session that behaves like a well-mannered client."""
+    """Sesión de `requests` que se comporta como un cliente bien educado."""
 
     def __init__(self, user_agent: str, delay: float, timeout: int, retries: int):
         self.delay = delay
@@ -88,18 +88,19 @@ class PoliteSession:
         )
 
     def check_robots(self, url: str) -> bool:
-        """Return True when robots.txt allows fetching `url` with our agent.
+        """Devuelve True si robots.txt permite descargar `url` con nuestro agente.
 
-        RobotFileParser.read() is not used here: it downloads robots.txt with
-        urllib's default User-Agent, which Wikipedia answers with a 403. We
-        download the file with our own session instead, so the rules are
-        evaluated against the very agent we are going to send.
+        Aquí no se usa `RobotFileParser.read()`: ese método descarga robots.txt
+        con el User-Agent por defecto de urllib, y Wikipedia le responde 403.
+        Se descarga el archivo con la propia sesión, de modo que las reglas se
+        evalúan contra el mismo agente que vamos a enviar.
 
-        Failure is not a single case. RFC 9309 (2.3.1) distinguishes them:
-        a 4xx means the file does not exist, so there is no restriction; a 5xx
-        or an unreachable server means "assume complete disallow". Treating
-        both as "go ahead" would be a silent licence to crawl a server that is
-        explicitly telling us it cannot answer.
+        Un fallo al leer el archivo no significa siempre lo mismo. El RFC 9309
+        (2.3.1) los distingue: un 4xx significa que el archivo no existe, así
+        que no hay restricción; un 5xx o un servidor inalcanzable significan
+        asumir prohibición. Tratar ambos casos como «adelante» sería un permiso
+        silencioso para rastrear un servidor que nos está diciendo que no puede
+        responder.
         """
         parts = urlparse(url)
         robots_url = f"{parts.scheme}://{parts.netloc}/robots.txt"
@@ -107,15 +108,15 @@ class PoliteSession:
         parser.set_url(robots_url)
         try:
             response = self.session.get(robots_url, timeout=self.timeout)
-        except requests.RequestException as exc:  # unreachable, not a verdict
-            log.warning("Could not reach %s (%s); assuming disallow", robots_url, exc)
+        except requests.RequestException as exc:  # inalcanzable, no es un veredicto
+            log.warning("No se pudo acceder a %s (%s); se asume prohibido", robots_url, exc)
             return False
         if 400 <= response.status_code < 500:
-            log.warning("%s returned HTTP %s; no restrictions declared",
+            log.warning("%s devolvió HTTP %s; no declara restricciones",
                         robots_url, response.status_code)
             return True
         if response.status_code >= 500:
-            log.warning("%s returned HTTP %s; assuming disallow",
+            log.warning("%s devolvió HTTP %s; se asume prohibido",
                         robots_url, response.status_code)
             return False
         parser.parse(response.text.splitlines())
@@ -124,7 +125,7 @@ class PoliteSession:
         return allowed
 
     def get(self, url: str) -> str:
-        """Fetch a URL politely: fixed delay + jitter, retries with backoff."""
+        """Descarga una URL con retardo fijo más jitter y reintentos con espera."""
         last_error: Exception | None = None
         for attempt in range(1, self.retries + 1):
             time.sleep(self.delay + random.uniform(0, 0.4))
@@ -136,7 +137,7 @@ class PoliteSession:
                 if response.status_code == 429 or response.status_code >= 500:
                     wait = int(response.headers.get("Retry-After", 2 ** attempt))
                     log.warning(
-                        "HTTP %s on %s, retrying in %ss (attempt %s/%s)",
+                        "HTTP %s en %s; reintento en %ss (intento %s/%s)",
                         response.status_code, url, wait, attempt, self.retries,
                     )
                     time.sleep(wait)
@@ -146,49 +147,49 @@ class PoliteSession:
                 last_error = exc
                 wait = 2 ** attempt
                 log.warning(
-                    "%s on %s, retrying in %ss (attempt %s/%s)",
+                    "%s en %s; reintento en %ss (intento %s/%s)",
                     type(exc).__name__, url, wait, attempt, self.retries,
                 )
                 time.sleep(wait)
-        raise RuntimeError(f"Could not download {url}: {last_error}")
+        raise RuntimeError(f"No se pudo descargar {url}: {last_error}")
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Extract a dataset of the municipalities of Soria from Wikipedia.",
+        description="Extrae un dataset de los municipios de Soria desde la Wikipedia.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument("--index-url", default=DEFAULT_INDEX_URL,
-                        help="Page used as the link index")
+                        help="Página que se usa como índice de enlaces")
     parser.add_argument("--out", default=str(Path(__file__).resolve().parent.parent
                                              / "dataset" / "municipios_soria.csv"),
-                        help="Output CSV path")
+                        help="Ruta del CSV de salida")
     parser.add_argument("--delay", type=float, default=1.0,
-                        help="Minimum seconds between two requests")
-    parser.add_argument("--timeout", type=int, default=30, help="Per-request timeout")
-    parser.add_argument("--retries", type=int, default=3, help="Attempts per URL")
+                        help="Segundos mínimos entre dos peticiones")
+    parser.add_argument("--timeout", type=int, default=30, help="Timeout por petición")
+    parser.add_argument("--retries", type=int, default=3, help="Intentos por URL")
     parser.add_argument("--limit", type=int, default=0,
-                        help="Stop after N municipalities (0 = all); useful for tests")
+                        help="Se detiene tras N municipios (0 = todos); útil para pruebas")
     parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT,
-                        help="User-Agent sent with every request")
+                        help="User-Agent que se envía en cada petición")
     return parser
 
 
 def save_csv(rows: list[dict], out_path: Path) -> None:
-    """Write the dataset as UTF-8 CSV (with BOM so Excel reads accents)."""
+    """Escribe el dataset en CSV UTF-8 (con BOM para que Excel lea los acentos)."""
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", newline="", encoding="utf-8-sig") as handle:
         writer = csv.DictWriter(handle, fieldnames=FIELDS, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
-    log.info("Wrote %s rows to %s", len(rows), out_path)
+    log.info("Escritas %s filas en %s", len(rows), out_path)
 
 
 def report_completeness(rows: list[dict]) -> None:
-    """Print how many records have each field filled (raw evidence for §5)."""
+    """Registra cuántos registros tienen cada campo relleno (evidencia del §5)."""
     if not rows:
         return
-    log.info("Completeness report (%s records):", len(rows))
+    log.info("Informe de completitud (%s registros):", len(rows))
     for field in FIELDS:
         filled = sum(1 for row in rows if row.get(field) not in (None, ""))
         log.info("  %-18s %3d/%3d (%5.1f%%)",
@@ -205,21 +206,21 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     client = PoliteSession(args.user_agent, args.delay, args.timeout, args.retries)
-    log.info("User-Agent in use: %s", client.session.headers["User-Agent"])
+    log.info("User-Agent en uso: %s", client.session.headers["User-Agent"])
 
     if not client.check_robots(args.index_url):
-        log.error("robots.txt forbids fetching %s; aborting.", args.index_url)
+        log.error("robots.txt prohíbe descargar %s; se aborta.", args.index_url)
         return 2
 
-    # Level 1: the index page gives us the navigation frontier.
-    log.info("Reading index: %s", args.index_url)
+    # Nivel 1: la página índice nos da la frontera de navegación.
+    log.info("Leyendo el índice: %s", args.index_url)
     links = discover_municipality_links(client.get(args.index_url), args.index_url)
-    log.info("Discovered %s municipality links", len(links))
+    log.info("Encontrados %s enlaces de municipios", len(links))
     if args.limit:
         links = links[: args.limit]
-        log.info("Limit active: processing only %s municipalities", len(links))
+        log.info("Límite activo: se procesan solo %s municipios", len(links))
 
-    # Level 2: visit every article and extract its record.
+    # Nivel 2: se visita cada artículo y se extrae su registro.
     rows: list[dict] = []
     failures: list[str] = []
     today = date.today().isoformat()
@@ -229,18 +230,18 @@ def main(argv: list[str] | None = None) -> int:
             try:
                 record = parse_infobox(client.get(url), url)
             except Exception as exc:
-                log.error("  failed: %s", exc)
+                log.error("  error: %s", exc)
                 failures.append(f"{name} -> {url} ({exc})")
                 continue
             row = {"municipio": name, "fecha_extraccion": today}
             row.update(record)
             rows.append(row)
     finally:
-        # Partial results are still valuable if the run is interrupted.
+        # Un resultado parcial sigue siendo útil si el recorrido se interrumpe.
         save_csv(rows, Path(args.out))
 
     report_completeness(rows)
-    log.info("Done: %s ok, %s failed", len(rows), len(failures))
+    log.info("Terminado: %s correctos, %s fallidos", len(rows), len(failures))
     for failure in failures:
         log.warning("  %s", failure)
     return 0 if rows else 1

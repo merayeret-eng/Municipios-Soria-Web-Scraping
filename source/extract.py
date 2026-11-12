@@ -1,8 +1,8 @@
-"""HTML extraction helpers for the Soria municipalities dataset.
+"""Funciones de extracción de HTML para el dataset de municipios de Soria.
 
-This module contains no network code on purpose: it only turns HTML text into
-Python data. Keeping extraction separate from downloading makes the parser
-testable without hitting the server (see the `--limit` flag in scraper.py).
+Este módulo no contiene código de red a propósito: solo convierte texto HTML
+en datos de Python. Separar la extracción de la descarga hace que el parser se
+pueda probar sin tocar el servidor (véase la opción `--limit` de scraper.py).
 """
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ from urllib.parse import urljoin, unquote
 
 from bs4 import BeautifulSoup
 
-# Namespaces that are NOT municipality articles and must be ignored while
-# discovering links (images, categories, annexes, special pages...).
+# Espacios de nombres que NO son artículos de municipio y hay que ignorar al
+# descubrir enlaces (imágenes, categorías, anexos, páginas especiales...).
 SKIPPED_NAMESPACES = (
     "Archivo:",
     "Categoría:",
@@ -29,8 +29,8 @@ SKIPPED_NAMESPACES = (
     "Discusión:",
 )
 
-# Small caps used as thousand separators in Spanish text (plain space, NBSP,
-# narrow NBSP and thin space are all used by MediaWiki).
+# Espacios usados como separador de millares en el texto español (espacio
+# normal, NBSP, NBSP estrecho y espacio fino los usa MediaWiki).
 _SPACES = "\u0020\u00a0\u202f\u2009"
 
 _NUMBER_RE = re.compile(r"[-+]?\d[\d.," + _SPACES + r"]*")
@@ -39,10 +39,10 @@ _LATLON_RE = re.compile(r"(-?\d{1,3}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)")
 
 
 def clean_text(node) -> str:
-    """Return the visible text of a node with references and noise removed."""
+    """Devuelve el texto visible de un nodo, sin referencias ni ruido."""
     if node is None:
         return ""
-    # Reference markers ("[1]", "[2]") live in <sup class="reference">.
+    # Los marcadores de referencia ("[1]", "[2]") van en <sup class="reference">.
     for ref in node.select("sup.reference, sup.noprint, style, script"):
         ref.decompose()
     text = node.get_text(" ", strip=True)
@@ -51,7 +51,7 @@ def clean_text(node) -> str:
 
 
 def normalize_label(label: str) -> str:
-    """Normalize an infobox label: drop bullets, spaces and accents."""
+    """Normaliza la etiqueta de una fila: quita viñetas, espacios y acentos."""
     label = label.replace("\u2022", " ").replace("\u00b7", " ")
     label = re.sub(r"\[.*?\]", "", label)
     label = re.sub(r"\s+", " ", label).strip()
@@ -59,10 +59,10 @@ def normalize_label(label: str) -> str:
 
 
 def parse_number(raw: str) -> Optional[float]:
-    """Convert a Spanish-formatted number ("1 397,5") into a float.
+    """Convierte un número con formato español ("1 397,5") en un float.
 
-    Returns None when the text holds no number at all, so that missing data
-    stays explicitly missing instead of becoming a fake zero.
+    Devuelve None cuando el texto no contiene ningún número, de modo que un
+    dato ausente siga siendo ausente y no se convierta en un cero falso.
     """
     if not raw:
         return None
@@ -73,7 +73,7 @@ def parse_number(raw: str) -> Optional[float]:
     for space in _SPACES:
         token = token.replace(space, "")
     token = token.rstrip(".,")
-    if "," in token:                 # Spanish decimal comma
+    if "," in token:                 # coma decimal española
         token = token.replace(".", "").replace(",", ".")
     try:
         return float(token)
@@ -82,7 +82,7 @@ def parse_number(raw: str) -> Optional[float]:
 
 
 def parse_year(raw: str) -> Optional[int]:
-    """Extract the reference year of a population figure (e.g. '287 hab. (2025)')."""
+    """Extrae el año de referencia de una cifra de población ('287 hab. (2025)')."""
     if not raw:
         return None
     years = _YEAR_RE.findall(raw)
@@ -90,7 +90,7 @@ def parse_year(raw: str) -> Optional[int]:
 
 
 def _is_article_href(href: str) -> bool:
-    """True for links that point to an article in the main namespace."""
+    """Devuelve True para enlaces que apuntan a un artículo del espacio principal."""
     if not href or not href.startswith(("/wiki/", "https://es.wikipedia.org/wiki/")):
         return False
     if "/wiki/Archivo:" in href or "/wiki/File:" in href:
@@ -100,20 +100,20 @@ def _is_article_href(href: str) -> bool:
 
 
 def discover_municipality_links(html: str, base_url: str) -> list[tuple[str, str]]:
-    """Level 1 of the crawl: read the index table and return (name, url) pairs.
+    """Nivel 1 del recorrido: lee la tabla del índice y devuelve pares (nombre, url).
 
-    The annex page lists one municipality per row, and the first cell of every
-    row links to that municipality's own article. That link is what turns a
-    single static table into a navigation graph.
+    La página del anexo lista un municipio por fila y la primera celda de cada
+    fila enlaza al artículo propio de ese municipio. Ese enlace es lo que
+    convierte una tabla estática en un grafo de navegación.
     """
     soup = BeautifulSoup(html, "html.parser")
     table = soup.select_one("table.wikitable")
     if table is None:
-        raise ValueError("Index page does not contain the expected 'wikitable'")
+        raise ValueError("La página índice no contiene la tabla 'wikitable' esperada")
 
     seen: set[str] = set()
     found: list[tuple[str, str]] = []
-    for row in table.select("tr")[1:]:          # row 0 is the header
+    for row in table.select("tr")[1:]:          # la fila 0 es la cabecera
         cells = row.select("th, td")
         if not cells:
             continue
@@ -130,12 +130,13 @@ def discover_municipality_links(html: str, base_url: str) -> list[tuple[str, str
 
 
 def parse_infobox(html: str, page_url: str) -> dict[str, Optional[str]]:
-    """Level 2 of the crawl: turn one municipality article into a flat record.
+    """Nivel 2 del recorrido: convierte un artículo de municipio en un registro plano.
 
-    Every municipality article renders its data through the same template
-    ({{Ficha de entidad subnacional}}), so the infobox is a stable extraction
-    target. Fields that are absent are returned as None: no invention, no
-    imputation (cleaning is the goal of Práctica 2, not of this script).
+    Todos los artículos de municipio pintan sus datos con la misma plantilla
+    ({{Ficha de entidad subnacional}}), así que la ficha es un objetivo de
+    extracción estable. Los campos ausentes se devuelven como None: ni
+    invención ni imputación (la limpieza es el objetivo de la Práctica 2, no de
+    este script).
     """
     soup = BeautifulSoup(html, "html.parser")
 
@@ -173,7 +174,7 @@ def parse_infobox(html: str, page_url: str) -> dict[str, Optional[str]]:
         if not value:
             continue
 
-        # 'Ubicación' carries the decimal coordinates at the end of the cell.
+        # La fila 'Ubicación' lleva las coordenadas decimales al final de la celda.
         if label.startswith("Ubicaci"):
             coords = _LATLON_RE.search(value)
             if coords:
