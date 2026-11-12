@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "Si reutilizas este dataset, cítalo con estos datos."
+title: "Municipios de la provincia de Soria: población, superficie y altitud (Wikipedia, 2025)"
+type: dataset
+version: 1.0.0
+date-released: 2026-11-11
+license: CC-BY-SA-4.0
+authors:
+  - family-names: "Mera Arana"
+    given-names: "Aaron Yeret"
+    affiliation: "Universitat Oberta de Catalunya"
+repository-code: "https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping"
+url: "https://github.com/merayeret-eng/Municipios-Soria-Web-Scraping"
+abstract: >-
+  Dataset con una fila por municipio de la provincia de Soria (183 registros,
+  18 columnas), extraído de la Wikipedia en español mediante un scraper propio
+  en Python. Corte transversal completo con población de referencia 2025 y
+  extracción del 11 de noviembre de 2026.
+keywords:
+  - web scraping
+  - Soria
+  - municipios
+  - población
+  - despoblación

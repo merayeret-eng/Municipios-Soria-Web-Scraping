@@ -52,7 +52,7 @@ FIELDS = [
     "comarca",
     "partido_judicial",
     "poblacion",
-    "anio_poblacion",
+    "año_poblacion",
     "superficie_km2",
     "altitud_m",
     "densidad_hab_km2",

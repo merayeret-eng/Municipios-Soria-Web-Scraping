@@ -146,7 +146,7 @@ def parse_infobox(html: str, page_url: str) -> dict[str, Optional[str]]:
         "comarca": None,
         "partido_judicial": None,
         "poblacion": None,
-        "anio_poblacion": None,
+        "año_poblacion": None,
         "superficie_km2": None,
         "altitud_m": None,
         "densidad_hab_km2": None,
@@ -187,7 +187,7 @@ def parse_infobox(html: str, page_url: str) -> dict[str, Optional[str]]:
             number = parse_number(value)
             record["poblacion"] = f"{number:.0f}" if number is not None else None
             year = parse_year(value)
-            record["anio_poblacion"] = str(year) if year else None
+            record["año_poblacion"] = str(year) if year else None
         elif label.startswith("Superficie"):
             number = parse_number(value)
             record["superficie_km2"] = f"{number:.2f}" if number is not None else None

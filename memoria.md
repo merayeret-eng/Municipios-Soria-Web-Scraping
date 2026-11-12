@@ -70,7 +70,7 @@ classDiagram
         +String comarca
         +String partido_judicial
         +int poblacion
-        +int anio_poblacion
+        +int año_poblacion
         +float superficie_km2
         +int altitud_m
         +float densidad_hab_km2
@@ -90,7 +90,7 @@ classDiagram
     Municipio "1" --> "1" Metadatos_de_extraccion : procede de
 ```
 
-Los 18 campos se agrupan en cinco bloques: **identificación** (`municipio`, `titulo_articulo`), **geografía** (`superficie_km2`, `altitud_m`, `latitud`, `longitud`), **demografía** (`poblacion`, `anio_poblacion`, `densidad_hab_km2`), **administración** (`comarca`, `partido_judicial`, `codigo_postal`, `alcalde`, `partido_politico`, `gentilicio`, `sitio_web`) y **trazabilidad** (`url`, `fecha_extraccion`).
+Los 18 campos se agrupan en cinco bloques: **identificación** (`municipio`, `titulo_articulo`), **geografía** (`superficie_km2`, `altitud_m`, `latitud`, `longitud`), **demografía** (`poblacion`, `año_poblacion`, `densidad_hab_km2`), **administración** (`comarca`, `partido_judicial`, `codigo_postal`, `alcalde`, `partido_politico`, `gentilicio`, `sitio_web`) y **trazabilidad** (`url`, `fecha_extraccion`).
 
 ### 4.2 Esquema del proyecto
 
@@ -116,7 +116,7 @@ flowchart TB
 | `comarca` | texto | — | Comarca declarada en la ficha | `Pinares` |
 | `partido_judicial` | texto | — | Partido judicial al que pertenece | `Soria` |
 | `poblacion` | entero | habitantes | Población del año de referencia | `287` |
-| `anio_poblacion` | entero | año | Año al que corresponde la población | `2025` |
+| `año_poblacion` | entero | año | Año al que corresponde la población | `2025` |
 | `superficie_km2` | decimal | km² | Superficie municipal | `23.43` |
 | `altitud_m` | entero | m s. n. m. | Altitud de la capital municipal | `1140` |
 | `densidad_hab_km2` | decimal | hab/km² | Densidad declarada en la ficha | `12.25` |
@@ -131,7 +131,7 @@ flowchart TB
 | `url` | texto | — | URL exacta de la que se extrajo el registro | `https://es.wikipedia.org/wiki/Abejar` |
 | `fecha_extraccion` | fecha | ISO 8601 | Día en que se ejecutó el scraper | `2026-11-11` |
 
-Siete campos son numéricos (`poblacion`, `anio_poblacion`, `superficie_km2`, `altitud_m`, `densidad_hab_km2`, `latitud`, `longitud`), diez son texto y uno es fecha. El dataset admite análisis estadístico y agrupaciones.
+Siete campos son numéricos (`poblacion`, `año_poblacion`, `superficie_km2`, `altitud_m`, `densidad_hab_km2`, `latitud`, `longitud`), diez son texto y uno es fecha. El dataset admite análisis estadístico y agrupaciones.
 
 ### 5.2 Cobertura temporal
 
@@ -144,7 +144,7 @@ La extracción terminó sin errores (183 de 183 municipios). Cobertura de cada c
 
 | Campo | Cobertura | Campo | Cobertura |
 |---|---|---|---|
-| `municipio`, `comarca`, `poblacion`, `anio_poblacion`, `altitud_m`, `codigo_postal`, `alcalde`, `latitud`, `longitud`, `url`, `fecha_extraccion` | 183/183 (100 %) | `partido_judicial` | 181/183 (98,9 %) |
+| `municipio`, `comarca`, `poblacion`, `año_poblacion`, `altitud_m`, `codigo_postal`, `alcalde`, `latitud`, `longitud`, `url`, `fecha_extraccion` | 183/183 (100 %) | `partido_judicial` | 181/183 (98,9 %) |
 | `superficie_km2`, `densidad_hab_km2`, `partido_politico` | 180/183 (98,4 %) | `sitio_web` | 158/183 (86,3 %) |
 | `gentilicio` | 99/183 (54,1 %) | | |
 

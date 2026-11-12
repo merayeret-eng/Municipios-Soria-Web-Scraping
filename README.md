@@ -23,7 +23,7 @@ UTF-8 con BOM, separador coma. Sin limpiar: conserva ausencias e inconsistencias
 
 ### Variables
 
-- **7 numéricas:** `poblacion`, `anio_poblacion`, `superficie_km2`, `altitud_m`,
+- **7 numéricas:** `poblacion`, `año_poblacion`, `superficie_km2`, `altitud_m`,
   `densidad_hab_km2`, `latitud`, `longitud`
 - **10 de texto:** `municipio`, `comarca`, `partido_judicial`, `gentilicio`, `codigo_postal`,
   `alcalde`, `partido_politico`, `sitio_web`, `titulo_articulo`, `url`
